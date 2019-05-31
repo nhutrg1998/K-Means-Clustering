@@ -68,8 +68,13 @@ if __name__ == '__main__':
         for y in range(len(itemset[x])):
             itemset[x][y] = int(itemset[x][y])
 
-    centroids = [itemset[random.randrange(0, len(itemset))] for i in range(k)]
+    centroids = random.choices(itemset, k=k)
     classes = [[centroids[i]] for i in range(k)]
+
+    # print("Centroids: ")
+    # for i in centroids:
+    #     print(i)
+
     cluster = [0 for i in range(len(itemset))]
 
     for iteration in range(max_iteration):
@@ -81,6 +86,12 @@ if __name__ == '__main__':
             classification = distances.index(min(distances))
             classes[classification].append(itemset[item])
             cluster[item] = classification
+
+        # print("Classes: ")
+        # for i in classes:
+        #     print("Class {}: ".format(classes.index(i)))
+        #     for j in i:
+        #         print(j)
 
         print("Tính tâm cụm mới ...")
         new_centroids = [average(classes[i]) for i in range(k)]
@@ -99,7 +110,7 @@ if __name__ == '__main__':
         else: 
             print("Tâm cụm mới khác tâm cụm cũ, tiếp tục vòng lặp tiếp theo ...")
             centroids = new_centroids
-            classes = [[] for i in range(k)]
+            classes = [[centroids[i]] for i in range(k)]
     
     print("Kết thúc.")
     
