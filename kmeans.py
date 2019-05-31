@@ -64,19 +64,21 @@ if __name__ == '__main__':
     data = input(sys.argv[1])
     itemset = data[1]
 
+    # Định dạng lại itemset
     for x in range(len(itemset)):
         for y in range(len(itemset[x])):
             itemset[x][y] = int(itemset[x][y])
 
+    # Khởi tạo
     centroids = random.choices(itemset, k=k)
     classes = [[centroids[i]] for i in range(k)]
+    cluster = [0 for i in range(len(itemset))]
 
     # print("Centroids: ")
     # for i in centroids:
     #     print(i)
 
-    cluster = [0 for i in range(len(itemset))]
-
+    # Bắt đầu thuật toán K-Means
     for iteration in range(max_iteration):
         print("Vòng lặp thứ: {} ...".format(iteration))
 
